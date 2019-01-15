@@ -1,0 +1,12 @@
+{% extends "results_layout.html" %}
+{% block content %}
+	<p>Which class do you want to look at specifically?</p>
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+		{% for subfield in form %}
+		    <tr>
+		        <td>{{ subfield }}</td>
+		    </tr>
+		{% endfor %}
+	</form>
+{% endblock content %}

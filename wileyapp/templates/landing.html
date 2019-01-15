@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+    <p>Welcome to Wiley Plus Plus PRO. Follow the instructions to find out cool stuff about your grades.</p><br>
+    <p>1. Navigate to <a target="_blank" href="https://backpack.pinecrest.edu/SeniorApps/facelets/registration/loginCenter.xhtml">MyBackpack</a>, sign in, and click "Daily Assignments and Comments".</p>
+    <p>2. Copy all text (⌘A -> ⌘C)</p>
+    <p>3. Paste (⌘V) into the textbox below</p>
+    <p>4. Click "Process Information"</p>
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Raw Text</legend>
+                <div class="form-group">
+                    {{ form.text(class="form-control form-control-lg", autofocus="autofocus") }}
+                </div>
+            </fieldset>
+            <fieldset class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </fieldset>
+        </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,34 @@
+{% extends "results_layout.html" -%}
+{% block content %}
+    <div id="ridgeplot"></div>
+    <script>
+        fetch('/ridge_plot')
+        .then(function(response) { return response.json(); })
+        .then(function(item) { Bokeh.embed.embed_item(item, "ridgeplot"); })
+    </script>
+    <div id="workloadplot"></div>
+    <script>
+        fetch('/workload_plot')
+        .then(function(response) { return response.json(); })
+        .then(function(item) { Bokeh.embed.embed_item(item, "workloadplot"); })
+    </script>
+    <br>
+    <p>Type in the weighting for each assignment category to see even more specific statistics (like what you need for the rest of the year to get a certain grade).</p>
+    {% for course_obj in courses_obj %}
+        <meta id="{{ course_obj['id'] }}" data-name="{{ course_obj['course_name']}}">
+        <h1><p> <b>{{ course_obj['course_name'] }}</b> </p></h1>
+        <h2>GRADE TIMELINE</h2>
+        <div id="div{{ course_obj['id'] }}"></div>
+    {% endfor %}
+    {% for crs_obj in courses_obj %}
+        <script>
+            var course_obj = "{{ crs_obj }}";
+            var id = "{{ crs_obj.id }}";
+            var data = $('#' + id).data();
+            var course_name = data.name;
+            fetch('/plot1/' + course_name)
+            .then(function(response) { return response.json(); })
+            .then(function(item) { var id = "{{ crs_obj.id }}"; Bokeh.embed.embed_item(item, "div" + id); })
+        </script>
+    {% endfor %}
+{% endblock content %}
